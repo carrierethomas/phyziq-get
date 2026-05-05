@@ -1,8 +1,8 @@
-[{                                                        
-    "relation": ["delegate_permission/common.handle_all_urls"],
+[{                                                                                                                                                         
+    "relation": ["delegate_permission/common.handle_all_urls"],                                                                                              
     "target": {                                                                                                                                              
       "namespace": "android_app",                                                                                                                            
       "package_name": "com.thomaswin.phyziq",                                                                                                                
-      "sha256_cert_fingerprints": ["TON_SHA256"]                                                                                                             
-    }                                                       
+      "sha256_cert_fingerprints": ["9F:BE:FF:C5:BA:B5:87:CB:C2:E2:B3:D8:D2:F2:AB:82:DF:E0:86:4E:7C:5B:05:F2:78:AF:F0:8A:58:32:F2:2E"]                        
+    }                                                                                                                                                        
   }]
