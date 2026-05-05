@@ -1,0 +1,13 @@
+{                                                         
+    "applinks": {
+      "details": [{
+        "appIDs": ["5K46X39WC2.com.thomaswin.phyziq"],
+        "components": [                                                                                                                                      
+          { "/": "/u/*" },                                                                                                                                   
+          { "/": "/spectate/*" },                                                                                                                            
+          { "/": "/scans/*" },                                                                                                                               
+          { "/": "/join/*" }                                                                                                                                 
+        ]                                                                                                                                                    
+      }] 
+    }                                                                                                                                                        
+  }
