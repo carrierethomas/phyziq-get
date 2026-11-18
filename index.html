@@ -1,157 +1,352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phyziq</title>
-  <meta name="description" content="AI analyzes your body. Builds your perfect workout program." />
-  <meta property="og:title" content="Phyziq — AI-Powered Workout Programs" />
-  <meta property="og:description" content="AI analyzes your body. Builds your perfect workout program." />
-  <meta property="og:image" content="https://get.phyziq.app/icon.png" />
-  <meta property="og:url" content="https://get.phyziq.app" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HormOS : mange ce que la nature te donne</title>
+<meta name="description" content="Le score de Thomas : ce que l'aliment apporte à ton corps, pas juste ses calories. Zéro industriel. Inscris-toi pour être prévenu de la sortie de HormOS.">
+<meta property="og:title" content="HormOS : mange ce que la nature te donne">
+<meta property="og:description" content="Le Nutri-Score compte les calories. Mon score regarde ce que l'aliment apporte à ton corps. Zéro industriel.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://get.phyziq.app/img/logo.png">
+<meta name="theme-color" content="#F6F2EA">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* La marque de HormOS : le marbre, l'encre, la brique, la capitale romaine (Cinzel), et le logo de l'app. */
+  :root {
+    --marble: #F6F2EA;
+    --card: #FFFFFF;
+    --ink: #231E1A;
+    --ink-deep: #0F0D0B;
+    --muted: #6E655C;
+    --line: rgba(35, 30, 26, 0.12);
+    --brick: #A23B2A;
+    --gold: #F0C23C;
+    /* Mon score : du pire (F) au meilleur (S), la palette de l'app. */
+    --t-s: #0C9B5B; --t-a: #4CB944; --t-b: #A8C93A; --t-c: #F3C623; --t-d: #EE7118; --t-f: #EF4444;
+    /* Le Nutri-Score, représentation simplifiée. */
+    --n-a: #038141; --n-b: #85BB2F; --n-c: #FECB02; --n-d: #EE8100; --n-e: #E63E11;
+    --serif: 'Cinzel', 'Trajan Pro', Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--marble); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
 
-    body {
-      background: #000;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
-      text-align: center;
-      gap: 0;
-    }
+  /* La frise grecque. */
+  .meander { height: 10px; background:
+    linear-gradient(90deg, var(--ink) 2px, transparent 2px) 0 0 / 12px 10px,
+    linear-gradient(var(--ink) 2px, transparent 2px) 0 0 / 12px 10px,
+    linear-gradient(var(--ink) 2px, transparent 2px) 0 8px / 12px 10px;
+    opacity: .16; }
 
-    .icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 22px;
-      margin-bottom: 20px;
-    }
+  /* Le logo de l'app, partout. */
+  .logo { width: 36px; height: 36px; border-radius: 9px; }
+  .logo-lg { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 10px 24px rgba(15,13,11,.25); }
+  .logo-sm { width: 22px; height: 22px; border-radius: 6px; }
 
-    .app-name {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-weight: 700; letter-spacing: .26em; font-size: 17px; text-decoration: none; }
+  .soon { font-size: 12.5px; font-weight: 700; border: 1px solid var(--line); background: var(--card); padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
 
-    .subtitle {
-      font-size: 16px;
-      color: #888;
-      line-height: 1.5;
-      max-width: 280px;
-      margin-bottom: 40px;
-    }
+  .hero { padding: 26px 0 40px; display: grid; gap: 30px; align-items: center; }
+  @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr .9fr; padding: 48px 0 64px; } }
+  .eyebrow { font-family: var(--serif); font-weight: 700; color: var(--brick); letter-spacing: .22em; font-size: 12.5px; margin: 0 0 12px; }
+  h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 8.4vw, 60px); line-height: 1.04; letter-spacing: -.01em; margin: 0 0 16px; }
+  h1 em { font-style: normal; display: block; color: var(--brick); }
+  .lead { font-size: 17.5px; color: var(--muted); margin: 0 0 24px; max-width: 34em; }
+  .lead b { color: var(--ink); }
 
-    .btn-ios {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #fff;
-      color: #000;
-      font-size: 17px;
-      font-weight: 700;
-      padding: 16px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 14px;
-    }
+  /* Le formulaire de la liste d'attente. */
+  form.wait { display: flex; flex-wrap: wrap; gap: 10px; max-width: 520px; }
+  form.wait input[type=email] { flex: 1 1 240px; min-width: 0; font: inherit; font-size: 16px; padding: 15px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+  form.wait input[type=email]:focus { outline: none; border-color: var(--ink); }
+  form.wait button { flex: 0 0 auto; font: inherit; font-size: 16px; font-weight: 800; padding: 15px 20px; border-radius: 14px; border: 0; background: var(--ink); color: var(--marble); cursor: pointer; }
+  form.wait button[disabled] { opacity: .6; cursor: default; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .note { font-size: 13px; color: var(--muted); margin: 10px 0 0; max-width: 520px; }
+  .msg { font-size: 15px; font-weight: 700; margin: 12px 0 0; }
+  .msg:empty { margin: 0; }
+  .msg.ok { color: var(--t-s); }
+  .msg.err { color: var(--brick); }
 
-    .btn-android {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: transparent;
-      color: #444;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 14px 36px;
-      border-radius: 50px;
-      border: 1px solid #222;
-      width: 100%;
-      max-width: 300px;
-    }
+  /* La carte d'un aliment avec son tampon (comme dans l'app) : l'image, l'échelle de F à S, la note, le mot. */
+  .feature { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 18px; box-shadow: 0 18px 40px rgba(35,30,26,.09); }
+  .feature-img { background: radial-gradient(circle at 50% 45%, #FFF 0%, #F3EEE5 70%); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 10px; }
+  .feature-img img { width: 56%; max-width: 220px; }
+  .feature-name { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin: 14px 2px 12px; }
+  .feature-name b { font-size: 20px; }
+  .feature-name span { color: var(--muted); font-size: 13px; }
+  .stamp-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .stamp-brand { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-weight: 700; font-size: 12.5px; letter-spacing: .14em; }
+  .stamp-num { font-weight: 800; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .stamp-num b { color: var(--ink); font-size: 24px; }
+  .scale { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; align-items: center; }
+  .scale span { display: flex; align-items: center; justify-content: center; height: 34px; border-radius: 9px; font-weight: 900; color: #fff; opacity: .26; font-size: 15px; }
+  .scale span.on { opacity: 1; height: 50px; border-radius: 13px; font-size: 24px; box-shadow: 0 6px 14px rgba(0,0,0,.18); }
+  .scale span.on.t-s { box-shadow: 0 0 0 3px var(--gold), 0 6px 14px rgba(0,0,0,.18); }
+  .t-s { background: var(--t-s); } .t-a { background: var(--t-a); } .t-b { background: var(--t-b); }
+  .t-c { background: var(--t-c); color: var(--ink) !important; } .t-d { background: var(--t-d); } .t-f { background: var(--t-f); }
+  .stamp-word { margin-top: 12px; display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: var(--muted); }
+  .stamp-word b { font-size: 16px; color: var(--ink); }
 
-    .badge {
-      background: #1a1a1a;
-      color: #555;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
+  /* Le Nutri-Score, représentation simplifiée (marque de Santé publique France). */
+  .ns-head { font-weight: 800; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .ns-scale { display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; }
+  .ns-scale span { display: flex; align-items: center; justify-content: center; height: 34px; font-weight: 900; color: #fff; font-size: 15px; opacity: .35; }
+  .ns-scale span:first-child { border-radius: 10px 0 0 10px; } .ns-scale span:last-child { border-radius: 0 10px 10px 0; }
+  .ns-scale span.on { opacity: 1; height: 50px; border-radius: 13px !important; font-size: 24px; box-shadow: 0 6px 14px rgba(0,0,0,.18); position: relative; z-index: 1; }
+  .n-a { background: var(--n-a); } .n-b { background: var(--n-b); } .n-c { background: var(--n-c); color: var(--ink) !important; } .n-d { background: var(--n-d); } .n-e { background: var(--n-e); }
 
-    .tiktok-banner {
-      display: none;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 16px;
-      padding: 20px;
-      max-width: 300px;
-      width: 100%;
-      margin-bottom: 24px;
-      text-align: center;
-    }
+  section { padding: 44px 0; }
+  h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 5.4vw, 36px); line-height: 1.12; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 26px; font-size: 16px; max-width: 40em; }
+  .numeral { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 28px; padding: 0 8px; border-radius: 7px; background: var(--ink); color: var(--marble); font-family: var(--serif); font-weight: 700; font-size: 14px; margin-right: 12px; vertical-align: 5px; }
 
-    .tiktok-banner .arrow {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+  .versus { display: grid; gap: 18px; }
+  @media (min-width: 820px) { .versus { grid-template-columns: 1fr 1fr; } }
+  .side .box { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 18px; }
+  .side .who { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .side .who img { width: 54px; height: 54px; }
+  .side .who b { display: block; font-size: 17px; color: var(--ink); }
+  .side .who small { display: block; font-size: 13px; color: var(--muted); }
+  .side ul { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .side li { padding-left: 22px; position: relative; font-size: 15.5px; }
+  .side li::before { content: ''; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); background: var(--ink); opacity: .55; }
+  .verdict { margin: 14px 0 0; font-size: 15px; font-weight: 800; }
 
-    .tiktok-banner p {
-      font-size: 15px;
-      color: #ccc;
-      line-height: 1.5;
-    }
+  /* Ce que la nature donne : chaque aliment avec son image et sa note. */
+  .foods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (min-width: 820px) { .foods { grid-template-columns: repeat(3, 1fr); } }
+  .food { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 12px; text-align: center; }
+  .food .pic { background: radial-gradient(circle at 50% 45%, #FFF 0%, #F3EEE5 72%); border-radius: 16px; padding: 6px; display: flex; justify-content: center; }
+  .food .pic img { width: 74%; max-width: 150px; }
+  .food .n { font-weight: 800; font-size: 15.5px; margin: 10px 0 6px; }
+  .food .row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .food .l { width: 30px; height: 30px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 15px; }
+  .food .l.t-s { box-shadow: 0 0 0 2.5px var(--gold); }
+  .food .v { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .food .w { font-size: 12.5px; color: var(--muted); font-weight: 700; display: block; margin-top: 4px; }
 
-    .tiktok-banner strong {
-      color: #fff;
-    }
-  </style>
+  /* L'industriel : tolérance zéro. */
+  .ban { background: linear-gradient(180deg, #2A1512, #140A08); color: var(--marble); border-radius: 28px; padding: 30px 20px; }
+  @media (min-width: 820px) { .ban { padding: 44px; } }
+  .ban h2 { color: var(--marble); }
+  .ban .sub { color: rgba(246,242,234,.72); }
+  .ban .sub b { color: #FFB4A6; }
+  .banned { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (min-width: 820px) { .banned { grid-template-columns: repeat(3, 1fr); } }
+  .banned > div { border: 1.5px solid rgba(239,68,68,.55); border-radius: 20px; padding: 16px 14px; text-align: center; background: rgba(239,68,68,.08); }
+  @media (max-width: 819px) { .banned > div:last-child { grid-column: 1 / -1; } }
+  .banned svg { width: 44px; height: 44px; margin: 0 auto 8px; display: block; }
+  .banned .zero { font-family: var(--serif); font-weight: 700; font-size: 40px; line-height: 1; color: #FF6B5F; }
+  .banned .zero small { font-family: var(--sans); font-size: 14px; color: rgba(246,242,234,.6); font-weight: 700; }
+  .banned b { display: block; font-size: 15.5px; margin: 8px 0 2px; }
+  .banned span { font-size: 12.5px; font-weight: 900; letter-spacing: .12em; color: #FF8A7E; text-transform: uppercase; }
+
+  .night { background: linear-gradient(180deg, #231E1A, #0F0D0B); color: var(--marble); border-radius: 28px; padding: 32px 20px; }
+  @media (min-width: 820px) { .night { padding: 44px; } }
+  .night-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+  .night h2 { color: var(--marble); margin: 0; }
+  .night .sub { color: rgba(246,242,234,.7); }
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 0 0 26px; }
+  @media (min-width: 820px) { .pillars { grid-template-columns: repeat(4, 1fr); } }
+  .pillar { border: 1px solid rgba(246,242,234,.18); border-radius: 16px; padding: 14px; }
+  .pillar b { display: block; font-family: var(--serif); letter-spacing: .1em; font-size: 14px; }
+  .pillar span { font-size: 13.5px; color: rgba(246,242,234,.7); }
+  .night form.wait input[type=email] { background: rgba(246,242,234,.08); border-color: rgba(246,242,234,.25); color: var(--marble); }
+  .night form.wait input[type=email]::placeholder { color: rgba(246,242,234,.55); }
+  .night form.wait input[type=email]:focus { border-color: var(--marble); }
+  .night form.wait button { background: var(--marble); color: var(--ink); }
+  .night .note { color: rgba(246,242,234,.6); }
+  .night .msg.ok { color: #7EE2A8; }
+  .night .msg.err { color: #F2A99B; }
+
+  footer { padding: 32px 0 20px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between; align-items: center; }
+  footer .who { display: flex; align-items: center; gap: 10px; }
+  footer nav { display: flex; gap: 18px; }
+  .legal { font-size: 12px; color: var(--muted); margin: 0 0 40px; }
+</style>
 </head>
 <body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><img class="logo" src="img/logo.png" alt="">HORMOS</a>
+    <span class="soon">Bientôt sur l'App Store</span>
+  </header>
+  <div class="meander" aria-hidden="true"></div>
 
-  <img class="icon" src="icon.png" alt="Phyziq" />
+  <div class="hero">
+    <div>
+      <p class="eyebrow">LE SCORE DE THOMAS</p>
+      <h1>Mange ce que la nature te donne. <em>Zéro industriel.</em></h1>
+      <p class="lead">Le Nutri-Score compte les calories. Mon score regarde <b>ce que l'aliment apporte à ton corps</b> : ce que la nature y a mis, et ce que l'industrie y a ajouté. Tu scannes, tu as une note de S à F, et pourquoi.</p>
+      <form class="wait" novalidate>
+        <label class="hp">Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <input type="email" name="email" placeholder="Ton email" autocomplete="email" inputmode="email" required aria-label="Ton email">
+        <button type="submit">Préviens-moi à la sortie</button>
+      </form>
+      <p class="msg" role="status" aria-live="polite"></p>
+      <p class="note">Un email le jour de la sortie, c'est tout. Jamais revendu. <a href="privacy.html">Confidentialité</a></p>
+    </div>
 
-  <div class="app-name">Phyziq</div>
-  <div class="subtitle">AI scans your body.<br>Builds your perfect training program.</div>
-
-  <div class="tiktok-banner" id="tiktokBanner">
-    <div class="arrow">↗️</div>
-    <p>Tap <strong>···</strong> at the bottom right,<br>then <strong>Open in Safari</strong> to download the app.</p>
+    <!-- Le foie, tel que l'app le note : 91, S, Élite. -->
+    <div class="feature" role="img" aria-label="Le foie dans HormOS : 91 sur 100, rang S, Élite">
+      <div class="feature-img"><img src="img/liver.png" alt=""></div>
+      <div class="feature-name"><b>Foie</b><span>cuit</span></div>
+      <div class="stamp-head"><span class="stamp-brand"><img class="logo-sm" src="img/logo.png" alt="">HORMOS FOOD SCORE</span><span class="stamp-num"><b>91</b> / 100</span></div>
+      <div class="scale"><span class="t-f">F</span><span class="t-d">D</span><span class="t-c">C</span><span class="t-b">B</span><span class="t-a">A</span><span class="t-s on">S</span></div>
+      <div class="stamp-word"><span>Ce que ton corps ne fabrique pas : rétinol, B12, fer héminique</span><b>Élite</b></div>
+    </div>
   </div>
 
-  <a class="btn-ios" href="https://apps.apple.com/app/id6759914168" id="iosBtn">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-    </svg>
-    Download on iOS
-  </a>
+  <div class="meander" aria-hidden="true"></div>
 
-  <div class="btn-android">
-    Android
-    <span class="badge">Coming soon</span>
-  </div>
+  <section>
+    <h2><span class="numeral">I</span>Le même beurre, deux notes</h2>
+    <p class="sub">Le Nutri-Score et mon score ne regardent pas la même chose.</p>
+    <div class="versus">
+      <div class="side">
+        <div class="box" role="img" aria-label="Le Nutri-Score du beurre : E">
+          <div class="who"><img src="img/butter.png" alt=""><span><b>Le beurre</b><small>Nutri-Score</small></span></div>
+          <div class="ns-head">Nutri-Score</div>
+          <div class="ns-scale"><span class="n-a">A</span><span class="n-b">B</span><span class="n-c">C</span><span class="n-d">D</span><span class="n-e on">E</span></div>
+          <p class="verdict">E : le gras saturé le fait tomber.</p>
+        </div>
+        <ul>
+          <li>Il calcule sur 100 g : les calories, les sucres, les graisses saturées et le sel font baisser la note ; les fibres, les protéines, les fruits et les légumes la font monter.</li>
+          <li>Il ne regarde ni les additifs ni la transformation.</li>
+          <li>Le gras animal le fait tomber : le beurre finit en&nbsp;E.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <div class="box" role="img" aria-label="Le score HormOS du beurre cru : 84 sur 100, rang A, Excellent">
+          <div class="who"><img src="img/butter.png" alt=""><span><b>Le beurre cru</b><small>Mon score</small></span></div>
+          <div class="stamp-head"><span class="stamp-brand"><img class="logo-sm" src="img/logo.png" alt="">HORMOS FOOD SCORE</span><span class="stamp-num"><b>84</b> / 100</span></div>
+          <div class="scale"><span class="t-f">F</span><span class="t-d">D</span><span class="t-c">C</span><span class="t-b">B</span><span class="t-a on">A</span><span class="t-s">S</span></div>
+          <p class="verdict">A, Excellent : il nourrit.</p>
+        </div>
+        <ul>
+          <li>D'abord ce que l'aliment apporte et que ton corps ne fabrique pas : rétinol, B12, DHA, zinc, fer héminique, créatine, K2, choline.</li>
+          <li>Puis la transformation : classification NOVA, additifs, huiles raffinées, sucres ajoutés.</li>
+          <li>Puis la provenance et la préparation : herbe, plein air, sauvage, fermier ; cru, fermenté, mijoté, friture.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isTikTok = ua.includes('musical_ly') || ua.includes('bytedancewebview') || ua.includes('tiktok');
-    if (isTikTok) {
-      document.getElementById('tiktokBanner').style.display = 'block';
-      document.getElementById('iosBtn').style.display = 'none';
-    }
-  </script>
+  <section>
+    <h2><span class="numeral">II</span>Ce que la nature te donne</h2>
+    <p class="sub">Un aliment entier d'origine animale part haut. Les notes de l'app, telles quelles.</p>
+    <div class="foods">
+      <div class="food"><div class="pic"><img src="img/liver.png" alt=""></div><div class="n">Foie</div><div class="row"><span class="l t-s">S</span><span class="v">91 / 100</span></div><span class="w">Élite</span></div>
+      <div class="food"><div class="pic"><img src="img/sardines.png" alt=""></div><div class="n">Sardines</div><div class="row"><span class="l t-a">A</span><span class="v">89 / 100</span></div><span class="w">Excellent</span></div>
+      <div class="food"><div class="pic"><img src="img/eggs.png" alt=""></div><div class="n">Œufs</div><div class="row"><span class="l t-a">A</span><span class="v">85 / 100</span></div><span class="w">Excellent</span></div>
+      <div class="food"><div class="pic"><img src="img/butter.png" alt=""></div><div class="n">Beurre cru</div><div class="row"><span class="l t-a">A</span><span class="v">84 / 100</span></div><span class="w">Excellent</span></div>
+      <div class="food"><div class="pic"><img src="img/ribeye.png" alt=""></div><div class="n">Entrecôte</div><div class="row"><span class="l t-a">A</span><span class="v">84 / 100</span></div><span class="w">Excellent</span></div>
+      <div class="food"><div class="pic"><img src="img/honey.png" alt=""></div><div class="n">Miel</div><div class="row"><span class="l t-a">A</span><span class="v">82 / 100</span></div><span class="w">Excellent</span></div>
+    </div>
+  </section>
 
+  <section>
+    <div class="ban">
+      <h2><span class="numeral" style="background:#EF4444;color:#fff">III</span>L'industriel : tolérance zéro</h2>
+      <p class="sub">Additifs, huiles raffinées, sucres ajoutés : un produit ultra-transformé prend <b>0</b>, quels que soient ses macros. Pas « à éviter » : <b>à bannir</b>.</p>
+      <div class="banned">
+        <div>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#FF6B5F" stroke-width="4"/><line x1="10" y1="38" x2="38" y2="10" stroke="#FF6B5F" stroke-width="4"/></svg>
+          <div class="zero">0<small> / 100</small></div><b>Soda</b><span>À bannir</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#FF6B5F" stroke-width="4"/><line x1="10" y1="38" x2="38" y2="10" stroke="#FF6B5F" stroke-width="4"/></svg>
+          <div class="zero">0<small> / 100</small></div><b>Chocolat au lait</b><span>À bannir</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#FF6B5F" stroke-width="4"/><line x1="10" y1="38" x2="38" y2="10" stroke="#FF6B5F" stroke-width="4"/></svg>
+          <div class="zero">0<small> / 100</small></div><b>Tout l'ultra-transformé</b><span>À bannir</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="night">
+      <div class="night-head"><img class="logo-lg" src="img/logo.png" alt="Logo de HormOS"><h2>Ce que je construis</h2></div>
+      <p class="sub">HormOS, c'est l'app de mon accompagnement, le Protocole H4. Le scanner y est ouvert à tous : tu scannes un code-barres, tu vois la composition, les additifs, le niveau de transformation, et ma note.</p>
+      <div class="pillars">
+        <div class="pillar"><b>NOURRIR</b><span>Ton alimentation</span></div>
+        <div class="pillar"><b>RÉPARER</b><span>Ton sommeil</span></div>
+        <div class="pillar"><b>ACTIVER</b><span>Ton activité physique</span></div>
+        <div class="pillar"><b>PROTÉGER</b><span>Les perturbateurs endocriniens</span></div>
+      </div>
+      <form class="wait" novalidate>
+        <label class="hp">Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <input type="email" name="email" placeholder="Ton email" autocomplete="email" inputmode="email" required aria-label="Ton email">
+        <button type="submit">Préviens-moi à la sortie</button>
+      </form>
+      <p class="msg" role="status" aria-live="polite"></p>
+      <p class="note">Tu es prévenu en premier, le jour de la sortie. Un seul email, jamais revendu.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="who"><img class="logo" src="img/logo.png" alt="">HormOS · Thomas</span>
+    <nav><a href="privacy.html">Confidentialité</a><a href="support.html">Support</a></nav>
+  </footer>
+  <p class="legal">Nutri-Score est une marque de Santé publique France, représentée ici de façon simplifiée, à titre de comparaison. Les notes de HormOS sont celles que calcule l'app.</p>
+</div>
+
+<script>
+  // La liste d'attente : la fonction join_waitlist de Supabase (migration 095), appelée avec la clé publique de l'app.
+  // Elle ne donne accès qu'à l'inscription : personne ne peut lire la liste. Réponses : 'ok', 'invalid', 'slow_down'.
+  var ENDPOINT = 'https://taqibxvguatdlzlgcphr.supabase.co/rest/v1/rpc/join_waitlist';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRhcWlieHZndWF0ZGx6bGdjcGhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzE2NDcsImV4cCI6MjA4NTcwNzY0N30.A_6ztknRe6HfcCh5wr4PjMoJzutNK_WMk0wG1hDOiMY';
+  // D'où vient la personne : ?s=tiktok, ?s=youtube, ?s=instagram dans le lien (lettres seulement, 40 au plus).
+  var params = new URLSearchParams(location.search);
+  var source = (params.get('s') || 'site').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40) || 'site';
+  var EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  function say(form, text, kind) {
+    var msg = form.nextElementSibling;
+    msg.textContent = text;
+    msg.className = 'msg' + (kind ? ' ' + kind : '');
+  }
+
+  document.querySelectorAll('form.wait').forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var input = form.querySelector('input[type=email]');
+      var button = form.querySelector('button');
+      var email = (input.value || '').trim();
+      // Un robot remplit le champ caché : on fait comme si c'était bon, sans rien envoyer.
+      if (form.querySelector('input[name=website]').value) { say(form, "C'est noté. Tu seras prévenu le jour de la sortie.", 'ok'); return; }
+      if (!EMAIL.test(email) || email.length > 254) { say(form, 'Cet email ne semble pas complet.', 'err'); input.focus(); return; }
+      button.disabled = true;
+      say(form, 'Inscription…', '');
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY },
+        body: JSON.stringify({ p_email: email, p_source: source, p_lang: (navigator.language || 'fr').slice(0, 8) })
+      }).then(function (res) {
+        if (res.status === 404) throw new Error('closed');
+        if (!res.ok) throw new Error('http');
+        return res.json();
+      }).then(function (result) {
+        if (result === 'ok') { say(form, "C'est noté. Tu seras prévenu le jour de la sortie.", 'ok'); input.value = ''; }
+        else if (result === 'invalid') { say(form, 'Cet email ne semble pas complet.', 'err'); }
+        else { say(form, 'Beaucoup de monde en ce moment : réessaie dans une minute.', 'err'); }
+      }).catch(function (error) {
+        say(form, error && error.message === 'closed' ? 'Les inscriptions ouvrent dans quelques heures : reviens vite.' : 'Pas de connexion : réessaie dans un instant.', 'err');
+      }).then(function () { button.disabled = false; });
+    });
+  });
+</script>
 </body>
 </html>
